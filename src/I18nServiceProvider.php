@@ -13,5 +13,10 @@ class I18nServiceProvider extends ServiceProvider
         // Jargões
         $this->app->instance('path.jargon', $this->app->path('jargon'));
         $this->app->register('Bugotech\Jargon\JargonServiceProvider');
+
+        // i18n
+        $this->app->singleton('i18n', function() {
+
+        });
     }
 }
