@@ -13,6 +13,7 @@
 
     "require": {
         "illuminate/translation": "5.2.*",
+        "bugotech/jargon"       : "dev-master",
         "netforcews/i18n"       : "dev-master"
     },
 
