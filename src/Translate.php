@@ -1,6 +1,5 @@
 <?php namespace Bugotech\I18n;
 
-
 class Translate
 {
     protected $cache = [];
