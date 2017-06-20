@@ -1,0 +1,30 @@
+{
+    "name"       : "bugotech/i18n",
+    "description": "The Bugotech I18n package.",
+    "homepage"   : "http://www.netforce.com.br",
+    "license"    : "GPL v.3",
+
+    "authors": [
+        {
+            "name" : "Bruno Gonçalves",
+            "email": "bugotech@gmail.com"
+        }
+    ],
+
+    "require": {
+        "illuminate/translation": "5.2.*",
+        "netforcews/i18n"       : "dev-master"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Bugotech\\I18n\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+
+    "minimum-stability": "dev",
+    "prefer-stable"    : true
+}

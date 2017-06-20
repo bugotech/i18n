@@ -1,0 +1,4 @@
+auto-service: bugotech.i18n
+
+services:
+ - \Bugotech\I18n\I18nServiceProvider
