@@ -3,6 +3,8 @@
 
 class Translate
 {
+    protected $cache = [];
+
     /**
      * Traduzir.
      * @param $id
@@ -10,15 +12,24 @@ class Translate
      */
     public function trans($id)
     {
+        // Verificar se tem no cache
+        if (array_key_exists($id, $this->cache)) {
+            return $this->cache[$id];
+        }
+
         // Traduzir o idioma
         $str = trans($id);
 
         // Traduzir os jargões
         $str = jargon($str);
 
-        return $str;
+        return $this->cache[$id] = $str;
     }
 
+    /**
+     * @param $msg
+     * @throws \Exception
+     */
     public function error($msg)
     {
         // Se msg for um objeto ou array deve fazer um print_r
