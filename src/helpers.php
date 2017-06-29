@@ -33,33 +33,21 @@ if (! function_exists('trans')) {
      * Translate the given message.
      *
      * @param  string  $id
-     * @param  array   $replace
-     * @param  string  $locale
      * @return \Symfony\Component\Translation\TranslatorInterface|string
      */
-    function trans($id = null, $replace = [], $locale = null)
+    function trans($id = null)
     {
-        if (is_null($id)) {
-            return app('translator');
-        }
-
-        return app('translator')->trans($id, $replace, 'messages', $locale);
+        return i18n($id);
     }
 }
 
-if (! function_exists('trans_choice')) {
+if (! function_exists('trans_error')) {
     /**
-     * Translates the given message based on a count.
-     *
-     * @param  string  $id
-     * @param  int|array|\Countable  $number
-     * @param  array   $parameters
-     * @param  string  $domain
-     * @param  string  $locale
-     * @return string
+     * Maker exception i18n.
+     * @param $msg
      */
-    function trans_choice($id, $number, array $parameters = [], $domain = 'messages', $locale = null)
+    function trans_error($msg)
     {
-        return app('translator')->transChoice($id, $number, $parameters, $domain, $locale);
+        i18n_error($msg);
     }
 }

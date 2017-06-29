@@ -17,7 +17,8 @@ class Translate
         }
 
         // Traduzir o idioma
-        $str = trans($id);
+        $str = app('translator')->trans($id);
+        //$str = trans($id);
 
         // Traduzir os jargões
         $str = jargon($str);
