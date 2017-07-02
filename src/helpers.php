@@ -30,10 +30,8 @@ if (! function_exists('i18n_error')) {
 
 if (! function_exists('trans')) {
     /**
-     * Translate the given message.
-     *
-     * @param  string  $id
-     * @return \Symfony\Component\Translation\TranslatorInterface|string
+     * @param null $id
+     * @return \Bugotech\I18n\Translate|string
      */
     function trans($id = null)
     {
