@@ -1,8 +1,26 @@
 <?php namespace Bugotech\I18n;
 
+use Symfony\Component\Translation\Translator;
+
 class Translate
 {
+    /**
+     * @var array
+     */
     protected $cache = [];
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * @param Translator $translator
+     */
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * Traduzir.
@@ -17,8 +35,7 @@ class Translate
         }
 
         // Traduzir o idioma
-        $str = app('translator')->trans($id);
-        //$str = trans($id);
+        $str = $this->translator->trans($id);
 
         // Traduzir os jargões
         $str = jargon($str);
@@ -53,5 +70,22 @@ class Translate
         } else {
             throw new \Exception($msg);
         }
+    }
+
+    /**
+     * @return Translator
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * Retorna o locale atual.
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->translator->getLocale();
     }
 }
