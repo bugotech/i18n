@@ -1,4 +1,5 @@
 auto-service: bugotech.i18n
+priority: 99
 
 services:
  - \Bugotech\I18n\I18nServiceProvider
