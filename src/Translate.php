@@ -1,6 +1,6 @@
 <?php namespace Bugotech\I18n;
 
-use Symfony\Component\Translation\Translator;
+use Illuminate\Translation\Translator;
 
 class Translate
 {
