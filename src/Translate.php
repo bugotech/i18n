@@ -88,4 +88,13 @@ class Translate
     {
         return $this->translator->getLocale();
     }
+
+    /**
+     * Definir o locale atual.
+     * @return void
+     */
+    public function setLocale($locale)
+    {
+        $this->translator->setLocale($locale);
+    }
 }
