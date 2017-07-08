@@ -5,15 +5,16 @@ if (! function_exists('i18n')) {
      * Translate by i18n the given message.
      *
      * @param  string  $id
+     * @param  array $parameters
      * @return \Bugotech\I18n\Translate|string
      */
-    function i18n($id = null)
+    function i18n($id = null, array $parameters = [])
     {
         if (is_null($id)) {
             return app('i18n');
         }
 
-        return app('i18n')->trans($id);
+        return app('i18n')->trans($id, $parameters);
     }
 }
 
@@ -30,12 +31,13 @@ if (! function_exists('i18n_error')) {
 
 if (! function_exists('trans')) {
     /**
-     * @param null $id
+     * @param string $id
+     * @param array $parameters
      * @return \Bugotech\I18n\Translate|string
      */
-    function trans($id = null)
+    function trans($id = null, array $parameters = [])
     {
-        return i18n($id);
+        return i18n($id, $parameters);
     }
 }
 

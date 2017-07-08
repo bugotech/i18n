@@ -25,9 +25,10 @@ class Translate
     /**
      * Traduzir.
      * @param $id
+     * @param array $parameters
      * @return string
      */
-    public function trans($id)
+    public function trans($id, array $parameters = [])
     {
         // Verificar se tem no cache
         if (array_key_exists($id, $this->cache)) {
@@ -35,7 +36,7 @@ class Translate
         }
 
         // Traduzir o idioma
-        $str = $this->translator->trans($id);
+        $str = $this->translator->trans($id, $parameters);
 
         // Traduzir os jargões
         $str = jargon($str);
