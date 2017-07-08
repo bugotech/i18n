@@ -7,7 +7,8 @@ class I18nServiceProvider extends ServiceProvider
     public function register()
     {
         // Translate
-        $this->app->instance('path.lang', realpath(__DIR__ . '/../../../netforcews/i18n/langs'));
+        //$this->app->instance('path.lang', realpath(__DIR__ . '/../../../netforcews/i18n/langs'));
+        $this->app->instance('path.lang', $this->app->path('langs'));
         $this->app->register('Illuminate\Translation\TranslationServiceProvider');
         //$this->loadTranslationsFrom(__DIR__ . '/../../netforcews/i18n/langs', '*');
 
