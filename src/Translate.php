@@ -1,5 +1,7 @@
 <?php namespace Bugotech\I18n;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
 
 class Translate
@@ -24,24 +26,33 @@ class Translate
 
     /**
      * Traduzir.
-     * @param $id
+     * @param string $id
      * @param array $parameters
+     * @param string $domain
      * @return string
      */
-    public function trans($id, array $parameters = [])
+    public function trans($id, array $parameters = [], $domain = 'messages')
     {
         // Verificar se tem no cache
         if (array_key_exists($id, $this->cache)) {
-            return $this->cache[$id];
+            return $this->makeReplacements($this->cache[$id], $parameters);
+        }
+
+        // Verificar se deve incorporar domain no id
+        if (! Str::is('*.*', $id)) {
+            $id = sprintf('%s.%s', $domain, $id);
         }
 
         // Traduzir o idioma
-        $str = $this->translator->trans($id, $parameters);
+        $str = $this->translator->trans($id);
 
         // Traduzir os jargões
         $str = jargon($str);
 
-        return $this->cache[$id] = $str;
+        // Guardar do cache
+        $this->cache[$id] = $str;
+
+        return $this->makeReplacements($str, $parameters);
     }
 
     /**
@@ -58,7 +69,7 @@ class Translate
         // Traduzir
         $msg = $this->trans($msg);
 
-        // TRocar parametros
+        // Trocar parametros
         $args = func_get_args();
         $args[0] = $msg;
         $msg = trim(call_user_func_array('sprintf', $args));
@@ -97,5 +108,35 @@ class Translate
     public function setLocale($locale)
     {
         $this->translator->setLocale($locale);
+    }
+
+    /**
+     * Make the place-holder replacements on a line.
+     *
+     * @param  string  $line
+     * @param  array   $replace
+     * @return string
+     */
+    protected function makeReplacements($line, array $replace)
+    {
+        if (! is_string($line)) {
+            return $line;
+        }
+
+        // Ordernar replaces
+        $replace = (new Collection($replace))->sortBy(function ($value, $key) {
+            return mb_strlen($key) * -1;
+        });
+
+        // Fazer a troca
+        foreach ($replace as $key => $value) {
+            $line = str_replace(
+                [':' . $key, ':' . Str::upper($key), ':' . Str::ucfirst($key)],
+                [$value, Str::upper($value), Str::ucfirst($value)],
+                $line
+            );
+        }
+
+        return $line;
     }
 }
