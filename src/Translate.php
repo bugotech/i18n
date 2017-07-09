@@ -1,7 +1,7 @@
 <?php namespace Bugotech\I18n;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Translation\Translator;
 
 class Translate
